@@ -6,15 +6,107 @@
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
-	<style type="text/css">
-	</style>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script>
 		$(function () {
 			$("#accordion").accordion();
+		});
+		$(function () {
+			$("#tabs").tabs();
+		});
+		$(function () {
+			var dialog, form,
+				// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+				emailRegex =
+				/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+				name = $("#name"),
+				email = $("#email"),
+				password = $("#password"),
+				allFields = $([]).add(name).add(email).add(password),
+				tips = $(".validateTips");
+
+			function updateTips(t) {
+				tips
+					.text(t)
+					.addClass("ui-state-highlight");
+				setTimeout(function () {
+					tips.removeClass("ui-state-highlight", 1500);
+				}, 500);
+			}
+
+			function checkLength(o, n, min, max) {
+				if (o.val().length > max || o.val().length < min) {
+					o.addClass("ui-state-error");
+					updateTips("Length of " + n + " must be between " +
+						min + " and " + max + ".");
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			function checkRegexp(o, regexp, n) {
+				if (!(regexp.test(o.val()))) {
+					o.addClass("ui-state-error");
+					updateTips(n);
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			function addUser() {
+				var valid = true;
+				allFields.removeClass("ui-state-error");
+
+				valid = valid && checkLength(name, "username", 3, 16);
+				valid = valid && checkLength(email, "email", 6, 80);
+				valid = valid && checkLength(password, "password", 5, 16);
+
+				valid = valid && checkRegexp(name, /^[a-z]([0-9a-z_\s])+$/i,
+					"Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter.");
+				valid = valid && checkRegexp(email, emailRegex, "eg. ui@jquery.com");
+				valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9");
+
+				if (valid) {
+					$("#users tbody").append("<tr>" +
+						"<td>" + name.val() + "</td>" +
+						"<td>" + email.val() + "</td>" +
+						"<td>" + password.val() + "</td>" +
+						"</tr>");
+					dialog.dialog("close");
+				}
+				return valid;
+			}
+
+			dialog = $("#dialog-form").dialog({
+				autoOpen: false,
+				height: 400,
+				width: 350,
+				modal: true,
+				buttons: {
+					"Zapisz": addUser,
+					Cancel: function () {
+						dialog.dialog("close");
+					}
+				},
+				close: function () {
+					form[0].reset();
+					allFields.removeClass("ui-state-error");
+				}
+			});
+
+			form = dialog.find("form").on("submit", function (event) {
+				event.preventDefault();
+				addUser();
+			});
+
+			$("#create-user").button().on("click", function () {
+				dialog.dialog("open");
+			});
 		});
 	</script>
 </head>
@@ -31,6 +123,23 @@
 			<div class="badge">Opcja 4</div>
 			<div class="badge">Opcja 5</div>
 		</nav>
+		<div id="dialog-form" title="Create new user">
+			<p class="validateTips">All form fields are required.</p>
+		   
+			<form>
+			  <fieldset>
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+				<label for="email">Email</label>
+				<input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+		   
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			  </fieldset>
+			</form>
+		  </div>
 		<div id="content">
 			<div id="accordion">
 				<h3>Section 1</h3>
@@ -73,7 +182,52 @@
 					</p>
 				</div>
 			</div>
+			<div id="tabs">
+				<ul>
+					<li>
+						<a href="#tabs-1">Nunc tincidunt</a>
+					</li>
+					<li>
+						<a href="#tabs-2">Proin dolor</a>
+					</li>
+					<li>
+						<a href="#tabs-3">Aenean lacinia</a>
+					</li>
+				</ul>
+				<div id="tabs-1">
+					<table id="users">
+						<tr>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+						</tr>
+					</table>
+					<button id="create-user">Create new user</button>
+				</div>
+				<div id="tabs-2">
+					<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque
+						molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor.
+						Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing
+						adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat
+						volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis,
+						eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+				</div>
+				<div id="tabs-3">
+					<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi
+						neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent
+						per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent
+						eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+					<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent
+						viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra
+						blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla
+						mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit
+						eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit
+						hendrerit.
+					</p>
+				</div>
+			</div>
 		</div>
+
 	</section>
 	<footer>
 		By Patryk Kopacz

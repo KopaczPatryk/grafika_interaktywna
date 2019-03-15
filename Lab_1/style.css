@@ -35,3 +35,6 @@ nav {
 .badge:nth-child(2n) {
 	background-color: royalblue;
 }
+/* table, tr,td {
+	border: initial;
+} */
