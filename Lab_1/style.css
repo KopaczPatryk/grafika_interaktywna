@@ -38,3 +38,6 @@ nav {
 /* table, tr,td {
 	border: initial;
 } */
+table td {
+	border: solid 1px black;
+}
