@@ -17,6 +17,9 @@
 	<script src="./js/components/datepicker.js"></script>
 	<script src="./js/components/dialog.js"></script>
 	<script src="./js/components/tabs.js"></script>
+
+	<!-- Helpery -->
+	<script src="./js/loremhelper.js"></script>
 	<!-- Dodawanie auta -->
 	<style>
 		.ui-controlgroup-vertical {
@@ -40,7 +43,7 @@
 
 <body>
 	<header>
-		<img src="./bannerlord.jpg" />
+		<img src="./img/bannerlord.jpg" />
 	</header>
 	<section>
 		<nav>
@@ -75,25 +78,20 @@
 				<h3>Section 1</h3>
 				<div>
 					<p>
-						Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi
-						metus, molestie vel, gravida
-						in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-						odio. Curabitur malesuada.
-						Vestibulum a velit eu ante scelerisque vulputate.
+						<script>hydrateWithGibberish(15)</script>
 					</p>
 				</div>
 				<h3>Section 2</h3>
 				<div>
 					<p>
-						Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit,
-						dolor at aliquet laoreet,
-						mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-						suscipit faucibus urna.
+						<script>hydrateWithGibberish(15)</script>
 					</p>
 				</div>
 				<h3>Section 3</h3>
 				<div>
-					<p>Nam enim risus.</p>
+					<p>
+						<script>hydrateWithGibberish(3)</script>
+					</p>
 					<ul>
 						<li>List item one</li>
 						<li>List item two</li>
@@ -102,20 +100,24 @@
 				</div>
 				<h3>Section 4</h3>
 				<div>
-					<p>Cras dictum.</p>
-					<p>Suspendisse eu nisl.</p>
+					<p>
+						<script>hydrateWithGibberish(3)</script>
+					</p>
+					<p>
+						<script>hydrateWithGibberish(3)</script>
+					</p>
 				</div>
 			</div>
 			<div id="tabs">
 				<ul>
 					<li>
-						<a href="#tabs-1">Nunc tincidunt</a>
+						<a href="#tabs-1">Tab1</a>
 					</li>
 					<li>
-						<a href="#tabs-2">Proin dolor</a>
+						<a href="#tabs-2">Tab2</a>
 					</li>
 					<li>
-						<a href="#tabs-3">Aenean lacinia</a>
+						<a href="#tabs-3">Tab3</a>
 					</li>
 				</ul>
 				<div id="tabs-1">
@@ -159,8 +161,12 @@
 					</div>
 				</div>
 				<div id="tabs-3">
-					<p>Mauris eleifend est et turpis. Duis id erat.</p>
-					<p>Duis cursus. Maece</p>
+					<p>
+						<script>hydrateWithGibberish(10)</script>
+					</p>
+					<p>
+						<script>hydrateWithGibberish(3)</script>
+					</p>
 				</div>
 			</div>
 		</div>
