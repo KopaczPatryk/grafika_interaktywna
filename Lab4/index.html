@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lab4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function showDraggables() {
+            let objects = document.getElementsByClassName("widget");
+            let i = 0;
+            [].forEach.call(objects, function (el) {
+                el.innerHTML = "Przesuń mnie " + i;
+                i++;
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="showDraggables()">Dostosuj układ strony</button>
+    <section id="panels">
+        <div class="panel" id="p1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="id001" class="widget" draggable="true" ondragstart="drag(event)">
+
+            </div>
+            <div id="id002" class="widget" draggable="true" ondragstart="drag(event)">
+
+            </div>
+            <div id="id003" class="widget" draggable="true" ondragstart="drag(event)">
+
+            </div>
+            <div id="id004" class="widget" draggable="true" ondragstart="drag(event)">
+
+            </div>
+            <div id="id005" class="widget" draggable="true" ondragstart="drag(event)">
+
+            </div>
+        </div>
+        <div class="panel" id="p2" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+        </div>
+        <div class="panel" id="p3" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+        </div>
+    </section>
+
+</body>
+
+</html>

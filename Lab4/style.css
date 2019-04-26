@@ -1,0 +1,27 @@
+#panels {
+    display: flex;
+    height: 1000px;
+}
+
+.panel {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+#p1 {
+    background-color: hotpink;
+}
+#p2 {
+    background-color: yellowgreen;
+}
+#p3 {
+    background-color: rebeccapurple;
+}
+
+.widget {
+    background: lawngreen;
+    width: 100px;
+    height: 100px;
+}
