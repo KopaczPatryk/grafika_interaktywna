@@ -20,8 +20,9 @@
     background-color: rebeccapurple;
 }
 
-.widget {
+.widget, .widget-restricted {
     background: lawngreen;
     width: 100px;
     height: 100px;
+    border: 1px solid black;
 }

@@ -13,14 +13,18 @@
         }
 
         function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.setData("id", ev.target.id);
+            ev.dataTransfer.setData("class", ev.target.className);
         }
 
         function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
+            if (ev.dataTransfer.getData("class") != "widget-restricted") {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("id");
+                ev.target.appendChild(document.getElementById(data));
+            }
         }
+
         function showDraggables() {
             let objects = document.getElementsByClassName("widget");
             let i = 0;
@@ -53,7 +57,12 @@
             </div>
         </div>
         <div class="panel" id="p2" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="id006" class="widget-restricted" draggable="true" ondragstart="drag(event)">
 
+            </div>
+            <div id="id007" class="widget-restricted" draggable="true" ondragstart="drag(event)">
+
+            </div>
         </div>
         <div class="panel" id="p3" ondrop="drop(event)" ondragover="allowDrop(event)">
 
