@@ -1,0 +1,42 @@
+#album {
+    display: flex;
+    height: 1000px;
+    flex-direction: row;    
+}
+
+.panel {
+    flex: 1;
+    display: flex;
+    height: 100%;
+}
+
+#p1 {
+    background-color: hotpink;
+}
+#p2 {
+    background-color: yellowgreen;
+}
+#p3 {
+    background-color: rebeccapurple;
+}
+
+.thumbnail-frame {
+    text-align: center;
+    align-items: center;
+    background: lawngreen;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+}
+.thumbnail-frame:hover > .image {
+    transition: width 2s, height 2s, transform 2s;
+    transform: rotate(720deg);
+    width: 100px;
+    height: 100px;
+    transform:rotate(720deg);
+}
+.image {
+    margin: auto;
+    width: 15px;
+    height: 15px;
+}
