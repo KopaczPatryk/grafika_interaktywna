@@ -21,22 +21,27 @@
 }
 
 .thumbnail-frame {
-    text-align: center;
+    display: flex;
     align-items: center;
+    justify-content: center;
     background: lawngreen;
     width: 100px;
     height: 100px;
     border: 1px solid black;
+    justify-content: center;
+
 }
 .thumbnail-frame:hover > .image {
     transition: width 2s, height 2s, transform 2s;
     transform: rotate(720deg);
     width: 100px;
     height: 100px;
-    transform:rotate(720deg);
+    transform: translate(0px,0px);
 }
 .image {
     margin: auto;
     width: 15px;
     height: 15px;
+    display: inline-block;
+    transform: translate(0px,-200px);
 }
