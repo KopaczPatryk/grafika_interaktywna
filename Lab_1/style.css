@@ -35,9 +35,20 @@ nav {
 .badge:nth-child(2n) {
 	background-color: royalblue;
 }
-/* table, tr,td {
-	border: initial;
-} */
-table td {
+table {
+	border-collapse: collapse;
 	border: solid 1px black;
+}
+table tr:hover {
+	transition: transform 2s;
+	border: 1px lightcoral dashed;
+	background: lightblue;
+	transform: scale(1.1);
+}
+table tr {
+	transition: transform 2s;
+	transform: scale(1);
+}
+.stripes tr:nth-child(2n + 1) {
+	background-color: red;
 }

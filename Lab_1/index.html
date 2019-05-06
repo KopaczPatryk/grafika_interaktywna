@@ -17,7 +17,15 @@
 	<script src="./js/components/datepicker.js"></script>
 	<script src="./js/components/dialog.js"></script>
 	<script src="./js/components/tabs.js"></script>
-
+	<script>
+		$(document).on('change', '#check', function () {
+			if (this.checked) {
+				$('#users').addClass("stripes");
+			} else {
+				$('#users').removeClass("stripes");
+			}
+		});
+	</script>
 	<!-- Helpery -->
 	<script src="./js/loremhelper.js"></script>
 	<!-- Dodawanie auta -->
@@ -121,12 +129,24 @@
 					</li>
 				</ul>
 				<div id="tabs-1">
+					<input type="checkbox" id="check">Alternate rows</input>
 					<table id="users">
 						<tr>
 							<td>Przykładowy wiersz 1</td>
 							<td>Przykładowy wiersz 1</td>
 							<td>Przykładowy wiersz 1</td>
 						</tr>
+						<tr>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+						</tr>
+						<tr>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+							<td>Przykładowy wiersz 1</td>
+						</tr>
+
 					</table>
 					<button id="create-user">Create new user</button>
 				</div>

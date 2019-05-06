@@ -1,0 +1,7 @@
+.litery {
+    padding: 8px;
+}
+.letter {
+    display: inline-block;
+    position: relative;
+}

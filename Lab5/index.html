@@ -6,6 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Lab5</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+        $(".thumbnail-frame").hover(function () {
+            $(".image").animate({
+                width: "70%",
+                opacity: 0.4,
+                marginLeft: "0.6in",
+                fontSize: "3em",
+                borderWidth: "10px"
+            }, 1500);
+        });
+    </script>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     <script>
     </script>
