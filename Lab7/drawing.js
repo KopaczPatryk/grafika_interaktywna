@@ -53,9 +53,7 @@ function drawPieChart(ctx, values) {
     ctx.stroke();
 
     let sum = 0;
-    Object.values(values).forEach(v => {
-        sum += v;
-    });
+    Object.values(values).forEach(v => { sum += v; });
 
     let entries = Object.entries(values);
 
@@ -73,21 +71,15 @@ function drawPieChart(ctx, values) {
         ctx.closePath();
         ctx.fill();
 
+        //legenda
         ctx.fillText(
-            k, 
-            x + Math.cos(curAng + calcPercentRad(sum, v) / 2) * r * legendOffset, 
+            k,
+            x + Math.cos(curAng + calcPercentRad(sum, v) / 2) * r * legendOffset,
             y + Math.sin(curAng + calcPercentRad(sum, v) / 2) * r * legendOffset
-            );
+        );
 
         curAng += calcPercentRad(sum, v);
     }
-    //legenda
-}
-
-function calcPercentRad(bigger, lesser) {
-    let x = lesser / bigger * 2 * Math.PI;
-    console.log(x);
-    return x;
 }
 
 function getRandomColor() {
@@ -98,3 +90,10 @@ function getRandomColor() {
     }
     return color;
 }
+
+function calcPercentRad(bigger, lesser) {
+    let x = lesser / bigger * 2 * Math.PI;
+    console.log(x);
+    return x;
+}
+
