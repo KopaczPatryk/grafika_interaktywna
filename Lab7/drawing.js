@@ -15,6 +15,13 @@ window.onload = () => {
     drawRoundRect(ctx, 250, 250, 150, 150, 25);
 
 
+    let a = 0;
+    setInterval(() => {
+        drawSpur(ctx,a);
+        ctx.strokeStyle = getRandomColor();
+        ctx.fillStyle = getRandomColor();
+        a+=0.5;
+    }, 100);
 };
 
 function drawSquareFlow(ctx) {
@@ -101,6 +108,39 @@ function drawRoundRect(ctx, xx, yy, xs, ys, r) {
     // ctx.lineTo(xx, yy);
     ctx.closePath();
     ctx.fill();
+}
+
+function drawSpur(ctx,a) {
+    let koloZ = {
+        x: 500,
+        y: 500,
+        r1: 50 + a*2,
+        r2: 100 + a*2
+    };
+    
+    let ile = 52; //liczba zębów
+    let r = koloZ.r1;
+    ctx.beginPath();
+    for (let i = 0; i < ile; i++) {
+        let alpha = ((Math.PI * 2) / ile) * (i); //aktualny kąt
+        alpha += a;
+        if (i % 2 == 0) {
+            if (r == koloZ.r1)
+                r = koloZ.r2;
+            else
+                r = koloZ.r1;
+        }
+        let x = (r * Math.sin(alpha)) + koloZ.x;
+        let y = (r * Math.cos(alpha)) + koloZ.y;
+        if (i == 0)
+            ctx.moveTo(x, y);
+        else
+            ctx.lineTo(x, y);
+    }
+    ctx.closePath();    
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle
 }
 
 function getRandomColor() {
