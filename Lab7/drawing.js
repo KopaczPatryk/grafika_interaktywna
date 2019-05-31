@@ -1,4 +1,3 @@
-
 window.onload = () => {
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
@@ -12,6 +11,9 @@ window.onload = () => {
         Czas: 10
     }
     drawPieChart(ctx, wartości);
+
+    drawRoundRect(ctx, 250, 250, 150, 150, 25);
+
 
 };
 
@@ -28,8 +30,7 @@ function drawSquareFlow(ctx) {
         ctx.lineTo(cx, cy);
         if (bottom) {
             cy += w;
-        }
-        else {
+        } else {
             cy -= w;
         }
         bottom = !bottom;
@@ -53,7 +54,9 @@ function drawPieChart(ctx, values) {
     ctx.stroke();
 
     let sum = 0;
-    Object.values(values).forEach(v => { sum += v; });
+    Object.values(values).forEach(v => {
+        sum += v;
+    });
 
     let entries = Object.entries(values);
 
@@ -82,6 +85,24 @@ function drawPieChart(ctx, values) {
     }
 }
 
+function drawRoundRect(ctx, xx, yy, xs, ys, r) {
+
+    ctx.beginPath();
+    ctx.arc(xx + r, yy + r, r, 3.14, 3.14 * 1.5, false);
+    // ctx.lineTo(xx + xs, yy);
+
+    ctx.arc(xx + xs, yy + r, r, 3.14 * 1.5, 3.14 * 2, false);
+    // ctx.lineTo(xx + xs + r, yy + ys);
+
+    ctx.arc(xx + xs, yy + ys, r, 3.14 * 2, 3.14 * 0.5, false);
+    // ctx.lineTo(xx + r, yy + ys + r);
+
+    ctx.arc(xx + r, yy + ys, r, 3.14 * 0.5, 3.14, false);
+    // ctx.lineTo(xx, yy);
+    ctx.closePath();
+    ctx.fill();
+}
+
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -96,4 +117,3 @@ function calcPercentRad(bigger, lesser) {
     console.log(x);
     return x;
 }
-
